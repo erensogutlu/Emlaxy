@@ -31,6 +31,17 @@ uygulama.use(cors());
 uygulama.use(express.json({ limit: '10kb' })); // Payload boyutu sınırı
 uygulama.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
+
+// ana rota / health check
+uygulama.get('/', (req, res) => {
+  res.json({
+    durum: "aktif",
+    mesaj: "Emlaxy API Sunucusu Aktif ve Çalışıyor",
+    versiyon: "1.0.0",
+    sahip: "Eren Söğütlü"
+  });
+});
+
 // rotalar
 uygulama.use('/api/kullanicilar', kullanicilarRotasi);
 uygulama.use('/api/ilanlar', ilanlarRotasi);
