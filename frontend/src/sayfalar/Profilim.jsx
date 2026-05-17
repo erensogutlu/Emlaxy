@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { useModal } from '../baglam/modal_baglami';
 import { toast } from 'react-hot-toast';
@@ -20,13 +21,13 @@ const Profilim = () => {
 
   const profilGetir = async () => {
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/kullanicilar/profil', {
+      const yanit = await fetch(`${API_URL}/api/kullanicilar/profil`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
 
-      const aramaYanit = await fetch('http://127.0.0.1:5000/api/aramalar', {
+      const aramaYanit = await fetch(`${API_URL}/api/aramalar`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -174,7 +175,7 @@ const Profilim = () => {
                             const onay = await onayIste('Bu aramayı silmek istediğinize emin misiniz?');
                             if(onay) {
                               try {
-                                const yanit = await fetch(`http://127.0.0.1:5000/api/aramalar/${arama.id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }});
+                                const yanit = await fetch(`${API_URL}/api/aramalar/${arama.id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }});
                                 if (yanit.ok) {
                                   toast.success('Arama silindi');
                                   setKayitliAramalar(kayitliAramalar.filter(k => k.id !== arama.id));

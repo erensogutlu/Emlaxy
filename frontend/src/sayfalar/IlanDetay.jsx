@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { useModal } from '../baglam/modal_baglami';
@@ -19,7 +20,7 @@ const IlanDetay = () => {
   useEffect(() => {
     const ilanGetir = async () => {
       try {
-        const yanit = await fetch(`http://127.0.0.1:5000/api/ilanlar/${id}`);
+        const yanit = await fetch(`${API_URL}/api/ilanlar/${id}`);
         if (yanit.ok) {
           const veri = await yanit.json();
           setIlan(veri);
@@ -40,7 +41,7 @@ const IlanDetay = () => {
     if (!onay) return;
     
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/ilanlar/${id}`, {
+      const yanit = await fetch(`${API_URL}/api/ilanlar/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

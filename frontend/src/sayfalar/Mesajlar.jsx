@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { API_URL } from '../config';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { useLocation, Link, Navigate } from 'react-router-dom';
 import { Send, User, MessageCircle, Trash2, Shield, ShieldOff, AlertCircle, ArrowLeft } from 'lucide-react';
@@ -33,7 +34,7 @@ const Mesajlar = () => {
   // Sohbetleri Getir
   const sohbetleriYukle = async () => {
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/mesajlar/sohbetler', {
+      const yanit = await fetch(`${API_URL}/api/mesajlar/sohbetler`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (yanit.ok) {
@@ -62,7 +63,7 @@ const Mesajlar = () => {
     setAktifSohbet(sohbet);
     try {
       // Mesajları yükle
-      const yanit = await fetch(`http://127.0.0.1:5000/api/mesajlar/sohbet/${sohbet.karsi_id}/${sohbet.ilan_id}`, {
+      const yanit = await fetch(`${API_URL}/api/mesajlar/sohbet/${sohbet.karsi_id}/${sohbet.ilan_id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (yanit.ok) {
@@ -70,7 +71,7 @@ const Mesajlar = () => {
       }
 
       // Engel durumunu yükle
-      const engelYanit = await fetch(`http://127.0.0.1:5000/api/kullanicilar/engel-durumu/${sohbet.karsi_id}`, {
+      const engelYanit = await fetch(`${API_URL}/api/kullanicilar/engel-durumu/${sohbet.karsi_id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (engelYanit.ok) {
@@ -86,7 +87,7 @@ const Mesajlar = () => {
     if (!onay) return;
 
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/mesajlar/${mesajId}`, {
+      const yanit = await fetch(`${API_URL}/api/mesajlar/${mesajId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -107,7 +108,7 @@ const Mesajlar = () => {
     if (!onay) return;
 
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/kullanicilar/engelle', {
+      const yanit = await fetch(`${API_URL}/api/kullanicilar/engelle`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ const Mesajlar = () => {
     if (!onay) return;
 
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/mesajlar/sohbet/${sohbet.karsi_id}/${sohbet.ilan_id}`, {
+      const yanit = await fetch(`${API_URL}/api/mesajlar/sohbet/${sohbet.karsi_id}/${sohbet.ilan_id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -155,7 +156,7 @@ const Mesajlar = () => {
     if (!yeniMesaj.trim() || !aktifSohbet) return;
 
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/mesajlar', {
+      const yanit = await fetch(`${API_URL}/api/mesajlar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

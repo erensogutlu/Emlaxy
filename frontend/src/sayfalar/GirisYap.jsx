@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
+import { API_URL } from '../config';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { Eye, EyeOff, Info, User, Shield, Briefcase } from 'lucide-react';
 
@@ -29,7 +30,7 @@ const GirisYap = () => {
     const ucNokta = kayitMi ? '/kayit' : '/giris';
 
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/kullanicilar${ucNokta}`, {
+      const yanit = await fetch(`${API_URL}/api/kullanicilar${ucNokta}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formMaddeleri)

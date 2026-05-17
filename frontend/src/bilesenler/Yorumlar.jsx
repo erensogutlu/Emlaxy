@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { MessageSquare, Send, CornerDownRight, User } from 'lucide-react';
 
@@ -15,7 +16,7 @@ const Yorumlar = ({ ilanId, ilanSahibiId }) => {
 
   const yorumlariGetir = async () => {
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/yorumlar/${ilanId}`);
+      const yanit = await fetch(`${API_URL}/api/yorumlar/${ilanId}`);
       if (yanit.ok) {
         const veri = await yanit.json();
         setYorumlar(veri);
@@ -36,7 +37,7 @@ const Yorumlar = ({ ilanId, ilanSahibiId }) => {
     if (!token || !yeniYorum.trim()) return;
 
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/yorumlar/${ilanId}`, {
+      const yanit = await fetch(`${API_URL}/api/yorumlar/${ilanId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ const Yorumlar = ({ ilanId, ilanSahibiId }) => {
     if (!token || !yeniYanit.trim()) return;
 
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/yorumlar/yanit/${yorumId}`, {
+      const yanit = await fetch(`${API_URL}/api/yorumlar/yanit/${yorumId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

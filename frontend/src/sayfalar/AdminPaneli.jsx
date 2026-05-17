@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { 
   Users, 
@@ -47,7 +48,7 @@ const AdminPaneli = () => {
       else if (aktifSekme === 'ilanlar') endpoint = 'ilanlar';
       else if (aktifSekme === 'mesajlar') endpoint = 'mesajlar';
 
-      const yanit = await fetch(`http://127.0.0.1:5000/api/admin/${endpoint}`, {
+      const yanit = await fetch(`${API_URL}/api/admin/${endpoint}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -69,7 +70,7 @@ const AdminPaneli = () => {
   const kullaniciSil = async (id) => {
     if (!window.confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?')) return;
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/admin/kullanici/${id}`, {
+      const yanit = await fetch(`${API_URL}/api/admin/kullanici/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -88,7 +89,7 @@ const AdminPaneli = () => {
   const ilanSil = async (id) => {
     if (!window.confirm('Bu ilanı silmek istediğinize emin misiniz?')) return;
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/admin/ilan/${id}`, {
+      const yanit = await fetch(`${API_URL}/api/admin/ilan/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 import { useLocation, useNavigate } from 'react-router-dom';
 import IlanKarti from '../bilesenler/IlanKarti';
 import { Search, Save, X } from 'lucide-react';
@@ -26,7 +27,7 @@ const Anasayfa = () => {
         Object.entries(filtreler).filter(([_, v]) => v !== '')
       ).toString();
       
-      const yanit = await fetch(`http://127.0.0.1:5000/api/ilanlar?${sorguParametreleri}`);
+      const yanit = await fetch(`${API_URL}/api/ilanlar?${sorguParametreleri}`);
       const veri = await yanit.json();
       setIlanlar(veri);
     } catch (hata) {
@@ -52,7 +53,7 @@ const Anasayfa = () => {
     ).toString();
 
     setYukleniyor(true);
-    fetch(`http://127.0.0.1:5000/api/ilanlar?${filtrelenmisSorgu}`)
+    fetch(`${API_URL}/api/ilanlar?${filtrelenmisSorgu}`)
       .then(res => res.json())
       .then(veri => setIlanlar(veri))
       .catch(err => console.error(err))
@@ -74,7 +75,7 @@ const Anasayfa = () => {
     if (!ozelBaslik) return;
 
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/aramalar', {
+      const yanit = await fetch(`${API_URL}/api/aramalar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

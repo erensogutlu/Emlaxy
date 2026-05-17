@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_URL } from '../config';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useKullanici } from '../baglam/kullanici_baglami';
 import { toast } from 'react-hot-toast';
@@ -32,7 +33,7 @@ const IlanEkle = () => {
   const formGonder = async (e) => {
     e.preventDefault();
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/ilanlar', {
+      const yanit = await fetch(`${API_URL}/api/ilanlar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

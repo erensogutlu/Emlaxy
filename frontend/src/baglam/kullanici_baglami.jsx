@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { API_URL } from '../config';
 
 const KullaniciBaglami = createContext();
 
@@ -10,7 +11,7 @@ export const KullaniciSaglayici = ({ children }) => {
 
   const favorileriGetir = async (mevcutToken) => {
     try {
-      const yanit = await fetch('http://127.0.0.1:5000/api/kullanicilar/profil', {
+      const yanit = await fetch(`${API_URL}/api/kullanicilar/profil`, {
         headers: { 'Authorization': `Bearer ${mevcutToken}` }
       });
       if (yanit.ok) {
@@ -54,7 +55,7 @@ export const KullaniciSaglayici = ({ children }) => {
     }
 
     try {
-      const yanit = await fetch(`http://127.0.0.1:5000/api/kullanicilar/favori/${ilanId}`, {
+      const yanit = await fetch(`${API_URL}/api/kullanicilar/favori/${ilanId}`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });
